@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <vector>
 #include <cstdint>
+#include <cmath>
+#include <stdexcept>
 
 #define data_type float
 
@@ -30,4 +32,24 @@ std::vector<std::vector<data_type>> simulate(const std::vector<data_type> &initi
         frames[i] = time_step(frames[i-1], diffusion_constant);
     }
     return frames;
+}
+
+std::vector<std::vector<data_type>> simulation_init(const std::vector<data_type> &initial_conditions,
+                                                    const data_type time,
+                                                    const data_type dt,
+                                                    const data_type dx,
+                                                    const data_type a) {
+    // Analize input
+    if (time < dt) {
+        throw std::invalid_argument("Time must be greater or equal to dt");
+    } else if (initial_conditions.size() < 3) {
+        throw std::invalid_argument("Initial temperatures must have a size greater then 2");
+    }
+
+    // Calculate constanst
+    data_type diffusion_const = a * dt / (dx * dx);
+    uint32_t frames_count = std::ceil(time / dt);
+
+    // Simulate
+    return simulate(initial_conditions, diffusion_const, frames_count);
 }
