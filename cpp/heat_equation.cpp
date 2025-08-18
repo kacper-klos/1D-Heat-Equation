@@ -4,6 +4,7 @@
 #include <cmath>
 #include <stdexcept>
 
+#include "heat_equation.h"
 #define data_type float
 
 std::vector<data_type> time_step(const std::vector<data_type> &temperature,
