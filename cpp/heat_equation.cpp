@@ -17,9 +17,12 @@ std::vector<data_type> time_step(const std::vector<data_type> &temperature,
      * @return Next state of temperature.
      */
 
+    uint32_t size = temperature.size();
     // Creating new temperature vector.
-    std::vector<data_type> new_temperature(temperature.size());
-    
+    std::vector<data_type> new_temperature(size);
+    // Set boundary values
+    new_temperature[0] = temperature[0];
+    new_temperature[size-1] = temperature[size-1];
     // Iterate through the temperatures ignoring the values on the boundary.
     for (int i = 1; i < temperature.size() - 1; ++i) {
         new_temperature[i] = temperature[i] + diffusion_const * (temperature[i+1] + temperature[i-1] - 2 * temperature[i]);
@@ -41,7 +44,7 @@ std::vector<std::vector<data_type>> simulate(const std::vector<data_type> &initi
      */
 
     // Create vector for frames
-    std::vector<std::vector<data_type>> frames(frames_count+1);
+    std::vector<std::vector<data_type>> frames(frames_count);
     frames[0] = initial_conditions;
 
     // Fill frames with simulation predictions

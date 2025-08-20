@@ -2,8 +2,8 @@ from cpp.build import simulation
 
 # Input data
 time = 3
-dt = 0.01
-dx = 0.1
+dt = 0.001
+dx = 1
 a = 110
 # One dm rod with 100 and 0 temperature at the end
 initial_conditions = [100.0] + [0.0] * 100 + [0.0]
