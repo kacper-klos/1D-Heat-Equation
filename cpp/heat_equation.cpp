@@ -5,7 +5,7 @@
 #include <stdexcept>
 
 #include "heat_equation.h"
-#define data_type float
+#define data_type double 
 
 std::vector<data_type> time_step(const std::vector<data_type> &temperature,
                                  const data_type diffusion_const) {

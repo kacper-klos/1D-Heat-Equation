@@ -1,4 +1,5 @@
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 #include "heat_equation.h"
 
 PYBIND11_MODULE(simulation, module) {
